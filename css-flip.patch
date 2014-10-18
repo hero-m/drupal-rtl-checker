@@ -1,0 +1,19 @@
+diff --git a/bin/css-flip b/bin/css-flip
+index 1b9dfa0..b7df7cf 100755
+--- a/bin/css-flip
++++ b/bin/css-flip
+@@ -44,8 +44,12 @@ function flipFiles(files, options, cb) {
+     if (!fs.existsSync(file)) {
+       return acc;
+     }
+-
+-    return acc.concat(flip(fs.readFileSync(file, 'utf8'), options));
++    var parser = require('css');
++    var str = fs.readFileSync(file, 'utf8');
++    var node = parser.parse(str, options);
++    var stringed = parser.stringify(node, options);
++    fs.writeFileSync(file + '.orig', stringed);
++    return acc.concat(flip(str, options));
+   }, []);
+ 
+   cb(css.join('\n'));
