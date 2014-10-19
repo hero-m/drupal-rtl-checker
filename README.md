@@ -23,5 +23,5 @@ Then, you can run the `rtl-checker.py` script with the following format:
 ```
 python rtl-checker.py /path/to/drupal
 ```
-The script outputs a `missing-rtls.txt` file containing a table of all the
+The script outputs a `missing-rtl.txt` file containing a table of all the
 missing RTL rules it has found.

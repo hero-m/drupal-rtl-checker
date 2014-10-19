@@ -12,7 +12,7 @@ def rtl_check(filename):
 
     # Remove RTL rules from CSS file, and store them in the "rtls" dictionary.
     for line in css:
-        line = line.rstrip()
+        line = line.strip()
         if line.startswith('[dir="rtl"]'):
             rules = []
             for rtl_rule in css:
@@ -111,7 +111,7 @@ for filename in matches:
         continue
     missing_rtls = rtl_check(filename)
     if len(missing_rtls) > 0:
-        table = PrettyTable(["Rule", "LTR", "RTL"])
+        table = PrettyTable(["Rule", "LTR", "MISSING RTL"])
         table.align = "l"
         output_file.write('==== ' + filename + ' : ' + str(len(missing_rtls)) + ' ERRORS ====\n')
         for missing_rtl in missing_rtls:
