@@ -8,21 +8,20 @@ from prettytable import PrettyTable
 def rtl_check(filename):
     css = open(filename)
     nortl = open(filename + '.nortl', 'w')
-    rtls = {}
+    rtls = []
 
     # Remove RTL rules from CSS file, and store them in the "rtls" dictionary.
     for line in css:
         line = line.strip()
         if line.startswith('[dir="rtl"]'):
             if not line.endswith('{'):
+                rtls.append(line.rstrip(',') + ' {')
                 continue;
-            rules = []
+            rtls.append(line)
             for rtl_rule in css:
                 rtl_rule = rtl_rule.strip()
                 if rtl_rule == '}':
                     break
-                rules.append(rtl_rule)
-            rtls[line] = rules
         else:
             nortl.write(line + '\n')
 
