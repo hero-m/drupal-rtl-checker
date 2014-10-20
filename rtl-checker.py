@@ -14,6 +14,8 @@ def rtl_check(filename):
     for line in css:
         line = line.strip()
         if line.startswith('[dir="rtl"]'):
+            if not line.endswith('{'):
+                continue;
             rules = []
             for rtl_rule in css:
                 rtl_rule = rtl_rule.strip()
@@ -69,7 +71,7 @@ def rtl_check(filename):
         line = diff[diff_pos].strip()
 
         if line.endswith('{'): # We are inside a CSS rule.
-            if line.startswith('.js'):
+            if line.startswith('.js '):
                 rtl_line = '[dir="rtl"]' + line
             else:
                 rtl_line = '[dir="rtl"] ' + line
